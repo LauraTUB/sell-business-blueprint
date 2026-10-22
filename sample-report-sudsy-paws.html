@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Sudsy Paws Grooming Co.: Sell Your Business Blueprint</title>
+<style>
+  :root {
+    --ink: #1A1D21;
+    --muted: #5E6672;
+    --faint: #8A929C;
+    --rule: #E4E7EB;
+    --track: #EEF0F2;
+    --paper: #FFFFFF;
+    --accent: #176B52;
+    --accent-soft: #E6F1EC;
+    --serif: "Iowan Old Style", "Charter", "Bitstream Charter", "Palatino Linotype", Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { background: var(--paper); }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--sans); }
+  .page { max-width: 1440px; margin: 0 auto; padding: 40px clamp(20px, 4vw, 56px) 56px; }
+  h1 { font: 700 42px/1.08 var(--serif); margin: 0; letter-spacing: -0.015em; color: var(--ink); }
+  h2 { font: 700 26px/1.2 var(--serif); margin: 0; letter-spacing: -0.01em; color: var(--ink); }
+  .sh { margin: 0 0 18px; }
+  .sh::before { content: ""; display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--accent); margin: 0 0 12px; }
+  .q { margin: 6px 0 0; font: 600 16px/1.45 var(--sans); color: var(--accent); max-width: 75ch; }
+  .top .q { font-size: 18px; margin-top: 8px; }
+  .top .meta { margin-top: 6px; }
+  .meta { color: var(--muted); font-size: 13px; margin: 0; }
+  section { padding: 28px 0; border-top: 1px solid var(--rule); }
+  .top { padding-top: 0; border-top: 0; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: center; margin-top: 24px; }
+  .gauge-label { text-align: center; font: 600 15px/1.3 var(--sans); color: var(--ink); margin: 0 0 6px; }
+  .gauge { position: relative; width: 300px; max-width: 100%; margin: 0 auto; }
+  .gauge svg { display: block; width: 100%; height: auto; }
+  .gauge-num { position: absolute; left: 0; right: 0; top: 62px; text-align: center; }
+  .gauge-num b { display: block; font: 600 64px/1 var(--serif); letter-spacing: -0.02em; }
+  .gauge-num span { font-size: 13px; color: var(--muted); }
+  .band { text-align: center; margin-top: 2px; font: 600 17px/1.3 var(--serif); color: var(--accent); }
+  .delta { text-align: center; font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .bands { list-style: none; margin: 14px auto 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 340px; }
+  .bands li { text-align: center; font-size: 12.5px; line-height: 1.25; color: var(--muted); }
+  .bands i { display: block; height: 6px; border-radius: 3px; background: var(--track); margin-bottom: 6px; }
+  .bands b { display: block; font-weight: 600; color: var(--ink); }
+  .bands span { display: block; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .bands li.on i { background: var(--accent); }
+  .bands li.on b { color: var(--accent); }
+  .values { display: grid; gap: 18px; }
+  .val small { display: block; color: var(--muted); font-size: 13px; margin-bottom: 2px; }
+  .val strong { font: 600 26px/1.15 var(--serif); }
+  .val.future strong { color: var(--accent); }
+  .trap { display: flex; gap: 14px; align-items: center; }
+  .trap svg { flex: none; }
+  .trap p { margin: 0; font-size: 14px; color: var(--ink); }
+  .trap p small { display: block; color: var(--muted); font-size: 13px; }
+
+  /* Callouts */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .callout { padding-left: 14px; border-left: 3px solid var(--rule); }
+  .callout.key { border-left-color: var(--accent); }
+  .callout h3 { font: 700 16px/1.3 var(--serif); margin: 0 0 6px; color: var(--ink); }
+  .callout.key h3 { color: var(--accent); }
+  .callout p { margin: 0; }
+
+  /* Waterfall */
+  .wf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+  .wf-head .sh { margin-bottom: 0; }
+  .toggle { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 3px; }
+  .toggle button { font: 500 13px/1 var(--sans); border: 0; background: transparent; color: var(--muted);
+    padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+  .toggle button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .wf-wrap { overflow-x: auto; margin-top: 8px; }
+  .wf-wrap svg { display: block; min-width: 640px; width: 100%; height: auto; }
+  .wf-sub { color: var(--muted); font-size: 13px; margin: 2px 0 0; }
+
+  table.moves { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 14px; }
+  .moves th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12.5px; padding: 6px 8px 6px 0;
+    border-bottom: 1px solid var(--rule); }
+  .moves td { padding: 9px 8px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .moves td.num, .moves th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .moves tr.is-key td:first-child { box-shadow: inset 3px 0 0 var(--accent); padding-left: 10px; }
+  .moves .drv { font-weight: 600; white-space: nowrap; }
+  .moves .what { color: var(--ink); }
+  .table-wrap { overflow-x: auto; }
+
+  /* Drivers */
+  .drivers { display: grid; gap: 12px; }
+  .drv-row { display: grid; grid-template-columns: 190px 1fr 76px; gap: 14px; align-items: center; }
+  .drv-row .nm { font-weight: 600; font-size: 14px; }
+  .drv-row .nm small { font-weight: 400; color: var(--faint); }
+  .bar { height: 10px; background: var(--track); border-radius: 5px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: #3B424B; border-radius: 5px; }
+  .drv-row.is-key .bar i { background: var(--accent); }
+  .drv-row .sc { white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; font-size: 14px; }
+  .drv-row .why { grid-column: 1 / -1; margin: -6px 0 0; color: var(--muted); font-size: 13.5px; }
+
+  /* A "no" on the TVR test, shown inside the 90-day move */
+  .gap-note { margin: 12px 0 0; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--accent-soft);
+    border-radius: 0 8px 8px 0; font-size: 14.5px; max-width: 75ch; }
+
+  /* Move */
+  .move-name { font: 700 22px/1.25 var(--serif); margin: 0 0 8px; color: var(--accent); }
+  .draft { margin-top: 14px; border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; background: #FAFBFB; }
+  .draft h3 { font: 600 14px/1.3 var(--sans); color: var(--muted); margin: 0 0 8px; }
+  .draft div { white-space: pre-wrap; }
+
+  .fs-link { grid-column: 1 / -1; justify-self: start; margin: -2px 0 0; padding: 2px 0; border: 0; background: none;
+    font: 600 13.5px/1.4 var(--sans); color: var(--accent); text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer; text-align: left; }
+  .fs-link:hover { text-decoration-thickness: 2px; }
+  .fs-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  .drv-row .fs-link { grid-row: auto; }
+  dialog.fs { width: min(620px, calc(100% - 32px)); max-height: 85vh; padding: 0; border: 0; border-radius: 14px;
+    color: var(--ink); background: var(--paper); box-shadow: 0 18px 50px rgba(26, 29, 33, 0.25); }
+  dialog.fs::backdrop { background: rgba(26, 29, 33, 0.45); }
+  .fs-inner { padding: 24px 24px 20px; overflow: auto; max-height: 85vh; }
+  .fs-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .fs-kicker { margin: 0 0 4px; font-size: 13px; color: var(--muted); }
+  .fs-title { margin: 0; font: 600 21px/1.25 var(--serif); }
+  .fs-close { flex: none; width: 36px; height: 36px; border: 1px solid var(--rule); border-radius: 50%; background: var(--paper);
+    font: 400 20px/1 var(--sans); color: var(--muted); cursor: pointer; }
+  .fs-close:focus-visible, .fs-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fs-move { margin: 14px 0 6px; }
+  .fs-adds { margin: 0 0 14px; font-size: 13.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .fs-body { white-space: pre-wrap; border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; background: #FAFBFB; font-size: 14.5px; }
+  .fs-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .fs-ai { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .fs-ai h3 { margin: 0 0 2px; font: 600 14.5px/1.3 var(--sans); }
+  .fs-ai p { margin: 0 0 8px; font-size: 13.5px; color: var(--muted); }
+  .fs-ai details summary { cursor: pointer; font-size: 13.5px; color: var(--accent); font-weight: 600; }
+  .fs-ai details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  .fs-prompt { white-space: pre-wrap; margin-top: 8px; border: 1px dashed var(--rule); border-radius: 10px; padding: 12px 14px;
+    font-size: 13px; color: var(--muted); max-height: 220px; overflow: auto; }
+  .fs-copy.alt { background: var(--paper); color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); }
+  .fs-copy { border: 0; border-radius: 999px; padding: 9px 16px; background: var(--accent); color: #fff; font: 600 13.5px/1 var(--sans); cursor: pointer; }
+  ul.watch { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  ul.watch li { padding-left: 18px; position: relative; }
+  ul.watch li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  .fine { color: var(--muted); font-size: 12.5px; }
+  .fine p { margin: 0 0 6px; }
+  .next { font-size: 14px; margin: 0 0 14px; }
+
+  /* Wide screens: use the full width without stretching lines */
+  .split { display: grid; gap: 0; }
+  .callout p, .move-why, .wf-sub, .fine p { max-width: 75ch; }
+  @media (min-width: 1000px) {
+    .hero { grid-template-columns: 340px 1fr; gap: 48px; }
+    .values { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 32px; align-items: start; }
+    .values .trap { grid-column: 1 / -1; }
+    .pair { gap: 48px; }
+    .drivers { grid-template-columns: 1fr 1fr; column-gap: 56px; row-gap: 18px; }
+    .split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); column-gap: 56px; border-top: 1px solid var(--rule); }
+    .split > section, .split > .side > section:first-child { border-top: 0; }
+    .split > .side > section + section { border-top: 1px solid var(--rule); }
+    .moves td.what { width: 55%; }
+  }
+  @media (min-width: 1280px) {
+    .values { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); }
+    .values .trap { grid-column: auto; align-items: flex-start; }
+  }
+  @media (max-width: 680px) {
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; }
+    .top .q { font-size: 16px; }
+    .hero { grid-template-columns: 1fr; justify-items: center; }
+    .values { width: 100%; }
+    .pair { grid-template-columns: 1fr; }
+    .drv-row { grid-template-columns: 1fr 76px; }
+    .drv-row .bar { grid-column: 1 / -1; grid-row: 2; }
+    .drv-row .why { grid-row: 3; margin-top: 0; }
+  }
+  @media print {
+    .page { padding: 0; max-width: none; }
+    .toggle, .fs-link, dialog.fs { display: none !important; }
+    section { break-inside: avoid; padding: 18px 0; }
+  }
+</style>
+</head>
+<body>
+<main class="page" id="app"></main>
+<dialog class="fs" id="fs" aria-labelledby="fs-title">
+  <div class="fs-inner">
+    <div class="fs-top"><div><p class="fs-kicker" id="fs-kicker"></p><h2 class="fs-title" id="fs-title"></h2></div>
+      <button type="button" class="fs-close" id="fs-close" aria-label="Close">&times;</button></div>
+    <p class="fs-move" id="fs-move"></p>
+    <p class="fs-adds" id="fs-adds"></p>
+    <div class="fs-body" id="fs-body"></div>
+    <div class="fs-ai" id="fs-ai">
+      <h3>Get AI help with this step</h3>
+      <p>Paste this prompt into Claude or any AI chat. It already has your numbers and this step, and it will walk you through getting it done.</p>
+      <details><summary>Preview the prompt</summary><div class="fs-prompt" id="fs-prompt"></div></details>
+    </div>
+    <div class="fs-actions">
+      <button type="button" class="fs-copy alt" id="fs-copy-ai">Copy AI prompt</button>
+      <button type="button" class="fs-copy" id="fs-copy">Copy draft</button>
+    </div>
+  </div>
+</dialog>
+<script id="report-data" type="application/json">{"inputs": {"business_name": "Sudsy Paws Grooming Co.", "owner_first_name": "Maya", "date": "2026-10-15", "goal": "run_without_me", "financial": {"revenue": 2640000, "trend": "up", "trend_pct": 18, "bottom_line_profit": 275000, "owner_pay": 95000, "owner_pay_taken_out": true, "replacement_salary": 110000}, "growth": {"category": "more_people_same_offer"}, "switzerland": {"biggest_customer_pct": 27, "irreplaceable_employee": true, "irreplaceable_supplier": false}, "teeter": {"timing": "as_you_go", "days_to_cash": 6, "overdue_30_plus": 48000}, "recurring": {"pct": 45, "contracted": true}, "monopoly": {"price_history": "raised_some_loss", "hard_to_substitute": false, "competes_on_price": false}, "satisfaction": {"measured": true, "referral_pct": 35, "repeat_pct": 65}, "hub": {"category": "delivery_or_sales_slows"}, "tvr": {"teachable": true, "valuable": true, "repeatable": true}, "assumptions": {"price_rise_pct": 5}}, "results": {"drivers": [{"key": "financial", "name": "Financial Performance", "score": 4.5, "partial": false, "max": 12.5}, {"key": "growth", "name": "Growth Potential", "score": 7.5, "partial": false, "max": 12.5}, {"key": "switzerland", "name": "Switzerland Structure", "score": 4.5, "partial": false, "max": 12.5}, {"key": "teeter", "name": "Valuation Teeter-Totter", "score": 8.0, "partial": false, "max": 12.5}, {"key": "recurring", "name": "Recurring Revenue", "score": 8.5, "partial": false, "max": 12.5}, {"key": "monopoly", "name": "Monopoly Control", "score": 6.0, "partial": false, "max": 12.5}, {"key": "satisfaction", "name": "Customer Satisfaction", "score": 8.5, "partial": false, "max": 12.5}, {"key": "hub", "name": "Hub and Spoke", "score": 4.5, "partial": false, "max": 12.5}], "total": 52, "band": "Operating", "owner_trap": {"score": 17.5, "max": 37.5, "business_is_owner": false}, "constraint": "hub", "constraint_ties": ["hub", "switzerland", "financial"], "money": {"revenue": 2640000, "adjusted_profit": 260000, "owner_earnings": 370000, "margin_pct": 9.8}, "value_today": {"multiple": 3.1, "low": 685000, "mid": 805000, "high": 925000}, "path": {"90_day": {"horizon": "90_day", "start_total": 52, "end_total": 65, "end_band": "Transferable", "end_value": {"multiple": 3.88, "low": 965000, "mid": 1140000, "high": 1310000}, "end_adjusted_profit": 295000, "total_adds": 335000, "steps": [{"driver": "hub", "name": "Hub and Spoke", "short": "Hub and Spoke", "score_from": 4.5, "score_to": 6.0, "total_after": 54, "value_after": 830000, "adds": 25000, "profit_added": null}, {"driver": "switzerland", "name": "Switzerland Structure", "short": "Switzerland", "score_from": 4.5, "score_to": 6.0, "total_after": 55, "value_after": 845000, "adds": 15000, "profit_added": null}, {"driver": "recurring", "name": "Recurring Revenue", "short": "Recurring", "score_from": 8.5, "score_to": 10.0, "total_after": 57, "value_after": 870000, "adds": 25000, "profit_added": null}, {"driver": "teeter", "name": "Valuation Teeter-Totter", "short": "Teeter-Totter", "score_from": 8.0, "score_to": 9.5, "total_after": 58, "value_after": 885000, "adds": 15000, "profit_added": null}, {"driver": "financial", "name": "Financial Performance", "short": "Financial", "score_from": 4.5, "score_to": 5.0, "total_after": 59, "value_after": 1010000, "adds": 125000, "profit_added": 33000}, {"driver": "monopoly", "name": "Monopoly Control", "short": "Monopoly", "score_from": 6.0, "score_to": 8.5, "total_after": 61, "value_after": 1050000, "adds": 40000, "profit_added": null}, {"driver": "satisfaction", "name": "Customer Satisfaction", "short": "Satisfaction", "score_from": 8.5, "score_to": 10.0, "total_after": 63, "value_after": 1090000, "adds": 40000, "profit_added": null}, {"driver": "growth", "name": "Growth Potential", "short": "Growth", "score_from": 7.5, "score_to": 9.5, "total_after": 65, "value_after": 1140000, "adds": 50000, "profit_added": null}]}, "12_month": {"horizon": "12_month", "start_total": 52, "end_total": 76, "end_band": "Transferable", "end_value": {"multiple": 4.7, "low": 1430000, "mid": 1690000, "high": 1940000}, "end_adjusted_profit": 360000, "total_adds": 885000, "steps": [{"driver": "hub", "name": "Hub and Spoke", "short": "Hub and Spoke", "score_from": 4.5, "score_to": 7.5, "total_after": 55, "value_after": 845000, "adds": 40000, "profit_added": null}, {"driver": "switzerland", "name": "Switzerland Structure", "short": "Switzerland", "score_from": 4.5, "score_to": 7.5, "total_after": 58, "value_after": 885000, "adds": 40000, "profit_added": null}, {"driver": "recurring", "name": "Recurring Revenue", "short": "Recurring", "score_from": 8.5, "score_to": 11.0, "total_after": 61, "value_after": 930000, "adds": 45000, "profit_added": null}, {"driver": "teeter", "name": "Valuation Teeter-Totter", "short": "Teeter-Totter", "score_from": 8.0, "score_to": 11.0, "total_after": 64, "value_after": 990000, "adds": 60000, "profit_added": null}, {"driver": "financial", "name": "Financial Performance", "short": "Financial", "score_from": 4.5, "score_to": 5.5, "total_after": 65, "value_after": 1390000, "adds": 400000, "profit_added": 99000}, {"driver": "monopoly", "name": "Monopoly Control", "short": "Monopoly", "score_from": 6.0, "score_to": 11.0, "total_after": 70, "value_after": 1530000, "adds": 140000, "profit_added": null}, {"driver": "satisfaction", "name": "Customer Satisfaction", "short": "Satisfaction", "score_from": 8.5, "score_to": 11.0, "total_after": 72, "value_after": 1580000, "adds": 50000, "profit_added": null}, {"driver": "growth", "name": "Growth Potential", "short": "Growth", "score_from": 7.5, "score_to": 11.0, "total_after": 76, "value_after": 1690000, "adds": 110000, "profit_added": null}]}}, "tvr": {"teachable": true, "valuable": true, "repeatable": true}, "caveat_text": "This is a direction, not an appraisal. Real prices depend on your industry, your size and who is buying, and buyers of a business this size often price on owner's earnings (profit plus what you pay yourself), so a real offer can land higher.", "assumptions_text": "Value is your profit after a $110K replacement salary for your role ($260K), times a multiple that rises with your score. Owner's earnings, profit plus what you pay yourself, are about $370K. Each move assumes its driver climbs one level in 12 months and gets halfway there in 90 days. The price move assumes a 5% rise across sales.", "assumptions": {"multiple_curve": [[0, 1.5], [40, 2.5], [60, 3.5], [80, 5.0], [100, 7.0]], "range": [0.85, 1.15], "price_rise_pct": 5, "price_capture": {"90_day": 0.25, "12_month": 0.75}}, "notes": []}, "narrative": {"what_is_working": "Sales grew 18% to $2.64M across three salons and five vans, 65% of clients rebook, and Sudsy Club has 610 members paying $48,190 a month on auto-renew.", "owner_trap_line": "Grooming runs without you, but new commercial deals, renewals and big approvals still go through you.", "constraint_line": "Hub and Spoke: you personally sell and renew every commercial account and Spa Day community, so if you stepped away for a month, new business would stop.", "drivers": {"financial": "About $260,000 of profit after a $110,000 general manager salary, roughly 10 cents per sales dollar, and growing.", "growth": "Doubling would take roughly twice the groomers, though the offer and the playbook stay the same.", "switzerland": "Austin Pet Resort's four locations are 27% of sales, and Jess, your Director of Operations, is the one person you could not run without.", "teeter": "Retail clients pay at pickup and members prepay, but $48,000 is more than 30 days late, mostly from commercial accounts.", "recurring": "About 45% shows up without a sales call: Sudsy Club plus the monthly Austin Pet Resort contract.", "monopoly": "You raised prices in March 2025 and lost a few clients, and dog owners can find another groomer nearby.", "satisfaction": "You track reviews and a post-groom survey, 65% rebook and about 35% come by referral.", "hub": "Grooming continues without you, but commercial sales, renewals and spending over $1,000 would slow or stop."}, "moves": {"hub": "Promote or hire a commercial accounts manager and hand over the nine Spa Day communities and the Austin Pet Resort renewal by January 31.", "switzerland": "Land four new commercial accounts to bring Austin Pet Resort under 20% of sales, and name a deputy for Jess.", "recurring": "Add a two-dog family plan to Sudsy Club and grow it from 610 to 800 members.", "teeter": "Collect the $48,000 past due and move every commercial contract to ACH billing on the 1st.", "financial": "Move large and doodle full grooms to $125 at all three salons and raise Spa Days from $1,650 to $1,850 at renewal.", "monopoly": "Become Williamson County's doodle and nervous-dog specialist, and retire the 20% new-client discount.", "satisfaction": "Ask every client who scores you 9 or 10 on the survey for one referral, with a $15 credit for both dogs.", "growth": "Write the salon-opening playbook so a fourth location can open without you on site."}, "move_name": "Hand off commercial sales", "move_why": "Commercial accounts and Spa Days are your fastest-growing, best-paid work, and every one of them runs through you. A buyer would see that as the business walking out the door with you. Putting one person in charge of selling and renewing them frees your calendar, protects the Austin Pet Resort renewal, and sets up the Switzerland move right behind it.", "weekly_numbers": ["How many commercial conversations did someone other than me lead this week?", "What share of this month's sales came from Austin Pet Resort?", "How much is more than 30 days past due today?"], "first_steps": {"hub": {"title": "Write the commercial accounts handoff outline", "body": "Maya, this week write down how you sell and renew commercial accounts, using the outline below. Then decide by Friday whether to promote from inside or post the role.\n\nCommercial Accounts: how Sudsy Paws sells them\n1. Who we sell to and what each pays (Austin Pet Resort contract, nine Spa Day communities at $1,650 a day)\n2. How a new deal starts: where leads come from and the first call\n3. Pricing and terms: 50% deposit to hold a date, balance due within 15 days, ACH on the 1st for contracts\n4. The renewal calendar, with every contract's end date\n5. What the manager decides alone, and when they check with you (any deal over $25,000 a year)\n6. The scorecard: new accounts a month, renewals signed 60 days early, past due under $10,000", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: promote or hire a commercial accounts manager and hand over our nine Pet Spa Day communities ($1,650 a day each) and the Austin Pet Resort renewal by January 31. Right now I personally sell and renew every commercial account, so new business would stop if I stepped away.\n\nHere is the first-step draft I was given:\n\"\"\"\nMaya, this week write down how you sell and renew commercial accounts, using the outline below. Then decide by Friday whether to promote from inside or post the role.\n\nCommercial Accounts: how Sudsy Paws sells them\n1. Who we sell to and what each pays (Austin Pet Resort contract, nine Spa Day communities at $1,650 a day)\n2. How a new deal starts: where leads come from and the first call\n3. Pricing and terms: 50% deposit to hold a date, balance due within 15 days, ACH on the 1st for contracts\n4. The renewal calendar, with every contract's end date\n5. What the manager decides alone, and when they check with you (any deal over $25,000 a year)\n6. The scorecard: new accounts a month, renewals signed 60 days early, past due under $10,000\n\"\"\"\n\nHelp me: 1) fill in each heading of the handoff outline below from my answers, 2) decide whether to promote from inside or hire, and write the job scorecard for either path, 3) plan a 30-day handover where the new person leads more calls each week, and 4) set the decision rules for what they can sign without me.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "switzerland": {"title": "Send the first new-account pitch", "body": "Maya, send this to one vet clinic or boarding kennel in Georgetown or Cedar Park this week. Four of these, signed, bring Austin Pet Resort under 20% of sales.\n\nSubject: Grooming for your boarding guests, handled\n\nHi [Name],\n\nI'm Maya, owner of Sudsy Paws Grooming Co. We groom for boarding and daycare guests at four local resorts, so their dogs go home clean without anyone on your team lifting a brush.\n\nWe can pick up and drop off from our Georgetown and Cedar Park salons, or send a van to you. Accounts are billed on the 1st of each month by ACH.\n\nCould we find 15 minutes next week to see if it's a fit for [Business name]?\n\nThanks,\nMaya\nSudsy Paws Grooming Co.", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: land four new commercial accounts to bring Austin Pet Resort, now 27% of our sales, under 20%, and name a deputy for Jess, our Director of Operations.\n\nHere is the first-step draft I was given:\n\"\"\"\nMaya, send this to one vet clinic or boarding kennel in Georgetown or Cedar Park this week. Four of these, signed, bring Austin Pet Resort under 20% of sales.\n\nSubject: Grooming for your boarding guests, handled\n\nHi [Name],\n\nI'm Maya, owner of Sudsy Paws Grooming Co. We groom for boarding and daycare guests at four local resorts, so their dogs go home clean without anyone on your team lifting a brush.\n\nWe can pick up and drop off from our Georgetown and Cedar Park salons, or send a van to you. Accounts are billed on the 1st of each month by ACH.\n\nCould we find 15 minutes next week to see if it's a fit for [Business name]?\n\nThanks,\nMaya\nSudsy Paws Grooming Co.\n\"\"\"\n\nHelp me: 1) list the kinds of local businesses most likely to say yes (vets, boarding, daycare, apartment communities) and how to find 20 of them near Georgetown and Cedar Park, 2) tighten the pitch email below for each type, 3) write a two-message follow-up for people who do not reply, and 4) outline how to pick and train Jess's deputy.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "recurring": {"title": "Draft the Sudsy Club family plan", "body": "Sudsy Club Family Plan\n\nTwo dogs, one membership: a full groom for each dog every six weeks, plus unlimited nail trims, for $139 a month instead of $158. Auto-renews monthly, cancel anytime with 30 days' notice.\n\nCheckout line for the front desk: \"You have two pups. Our family plan covers both for $139 a month and saves you $19. Want me to set it up today?\"\n\nFirst three to offer it to: the two-dog households already on Sudsy Club at the Round Rock salon. Pull the list from your booking system by Friday.", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: add a two-dog family plan to Sudsy Club, our grooming membership (610 members at $79 a month, auto-renewing), and grow it from 610 to 800 members.\n\nHere is the first-step draft I was given:\n\"\"\"\nSudsy Club Family Plan\n\nTwo dogs, one membership: a full groom for each dog every six weeks, plus unlimited nail trims, for $139 a month instead of $158. Auto-renews monthly, cancel anytime with 30 days' notice.\n\nCheckout line for the front desk: \"You have two pups. Our family plan covers both for $139 a month and saves you $19. Want me to set it up today?\"\n\nFirst three to offer it to: the two-dog households already on Sudsy Club at the Round Rock salon. Pull the list from your booking system by Friday.\n\"\"\"\n\nHelp me: 1) check the family plan price below against our single-dog price so it does not cut into what we keep per groom, 2) write the front-desk script and a short email to current two-dog members, 3) plan how to track sign-ups each week, and 4) flag the risk that members are just switching from regular grooms.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "teeter": {"title": "Send the Austin Pet Resort collections note", "body": "Maya, start with the biggest: about $31,400 of the $48,000 past due sits with Austin Pet Resort.\n\nSubject: Sudsy Paws invoices past 30 days\n\nHi [Name],\n\nThank you for another busy season together. Our records show $31,400 across four invoices that are now more than 30 days past due. I've attached the statement.\n\nCould you let me know a payment date this week? If anything on the invoices looks wrong, tell me and I'll fix it the same day.\n\nStarting with the January contract month, we're moving all commercial accounts to ACH billing on the 1st, so no one has to chase paper invoices. I'll send the one-page authorization form separately.\n\nThanks,\nMaya", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: collect the $48,000 that is more than 30 days past due, about $31,400 of it from Austin Pet Resort, our biggest customer, and move every commercial contract to ACH billing on the 1st of the month.\n\nHere is the first-step draft I was given:\n\"\"\"\nMaya, start with the biggest: about $31,400 of the $48,000 past due sits with Austin Pet Resort.\n\nSubject: Sudsy Paws invoices past 30 days\n\nHi [Name],\n\nThank you for another busy season together. Our records show $31,400 across four invoices that are now more than 30 days past due. I've attached the statement.\n\nCould you let me know a payment date this week? If anything on the invoices looks wrong, tell me and I'll fix it the same day.\n\nStarting with the January contract month, we're moving all commercial accounts to ACH billing on the 1st, so no one has to chase paper invoices. I'll send the one-page authorization form separately.\n\nThanks,\nMaya\n\"\"\"\n\nHelp me: 1) adjust the note below so it is firm but protects the relationship with our biggest customer, 2) plan the follow-up if there is no reply in five business days, 3) write the one-page ACH authorization and how to introduce it to every commercial account, and 4) set a simple weekly routine for checking past-due invoices.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "financial": {"title": "Draft the price-change note to clients", "body": "Subject: A note about large and doodle grooms\n\nHi [first name],\n\nThank you for trusting us with [pet name]. Large and doodle coats take our groomers close to three hours to wash, dry and finish the way you expect, and our prices haven't kept up with that time.\n\nStarting December 1, a large or doodle full groom will be $125. Any appointment booked before November 30 keeps today's price, even if it's in December.\n\nSudsy Club members aren't affected.\n\nQuestions? Just reply, I read every one.\n\nMaya and the Sudsy Paws team", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: raise large and doodle full grooms from $105 to $125 at all three salons starting December 1, and raise Pet Spa Days from $1,650 to $1,850 a day at each community's renewal.\n\nHere is the first-step draft I was given:\n\"\"\"\nSubject: A note about large and doodle grooms\n\nHi [first name],\n\nThank you for trusting us with [pet name]. Large and doodle coats take our groomers close to three hours to wash, dry and finish the way you expect, and our prices haven't kept up with that time.\n\nStarting December 1, a large or doodle full groom will be $125. Any appointment booked before November 30 keeps today's price, even if it's in December.\n\nSudsy Club members aren't affected.\n\nQuestions? Just reply, I read every one.\n\nMaya and the Sudsy Paws team\n\"\"\"\n\nHelp me: 1) tighten the client note below, 2) write a two-sentence text version and a short note to my groomers explaining what changes and how to answer clients who ask, 3) plan how to tell the Spa Day communities at renewal, and 4) tell me what to watch in December to know whether clients are leaving over price.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "monopoly": {"title": "Write the new positioning and the discount change", "body": "New one-liner for the website, Google profile and front desk:\n\"Williamson County's doodle and nervous-dog specialists.\"\n\nNote to post and send to the team:\n\nStarting November 15, we're retiring our 20% new-client discount. New clients now get something better: a free coat consult and a slow intro groom for nervous dogs, at our regular price. It's what we're known for, and it brings in the clients who stay.", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: position Sudsy Paws as Williamson County's doodle and nervous-dog specialists, and retire our 20% new-client discount in favor of a free coat consult and a slow intro groom for nervous dogs.\n\nHere is the first-step draft I was given:\n\"\"\"\nNew one-liner for the website, Google profile and front desk:\n\"Williamson County's doodle and nervous-dog specialists.\"\n\nNote to post and send to the team:\n\nStarting November 15, we're retiring our 20% new-client discount. New clients now get something better: a free coat consult and a slow intro groom for nervous dogs, at our regular price. It's what we're known for, and it brings in the clients who stay.\n\"\"\"\n\nHelp me: 1) test the one-liner below and give me two alternatives, 2) list every place it needs to change (website, Google profile, booking page, signs, front desk), 3) write the note to the team so everyone explains the change the same way, and 4) suggest one simple way to prove we are the specialists, like before-and-after photos or a nervous-dog promise.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "satisfaction": {"title": "Set up the referral ask after a 9 or 10", "body": "Text to send when a client scores you 9 or 10 on the post-groom survey:\n\n\"So glad [pet name] looks great! If you know a dog who'd love us too, send them our way. When they book, you both get $15 off your next groom. Here's your link: [referral link]\"\n\nSet it to send automatically from your booking system, and check the count of referral bookings every Friday.", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: ask every client who scores us 9 or 10 on our post-groom survey for one referral, with a $15 credit for both dogs. Today about 35% of new clients come by referral and 65% rebook.\n\nHere is the first-step draft I was given:\n\"\"\"\nText to send when a client scores you 9 or 10 on the post-groom survey:\n\n\"So glad [pet name] looks great! If you know a dog who'd love us too, send them our way. When they book, you both get $15 off your next groom. Here's your link: [referral link]\"\n\nSet it to send automatically from your booking system, and check the count of referral bookings every Friday.\n\"\"\"\n\nHelp me: 1) improve the referral text below, 2) work out how to set it to send automatically from our booking system, 3) decide how to track referral bookings and pay out credits, and 4) set a realistic referral target for the next 90 days.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}, "growth": {"title": "Start the salon-opening playbook", "body": "Salon Opening Playbook: Sudsy Paws\n\n1. Choosing the site: traffic, parking, distance from the other salons, lease terms to ask for\n2. Build-out checklist: tubs, dryers, tables, the vendor for each\n3. Hiring: roles to fill, in order, and the 90-day training plan for the full groom\n4. Opening 60 days: local launch, Sudsy Club sign-ups, first commercial accounts nearby\n5. Numbers by month 6: grooms a day, rebook rate, Sudsy Club members, profit\n\nThis week: Jess fills in sections 2 and 3 from the Cedar Park opening while it's fresh.", "ai_prompt": "I own Sudsy Paws Grooming Co., a dog grooming business near Round Rock, Texas, with three salons, five mobile vans and 41 people. Sales were $2.64M over the last 12 months, up 18%. My goal is for the business to run without me. I just ran my Sell Your Business Blueprint (Sellability Score 52 out of 100), and this is one of my next moves.\n\nThe move: write the salon-opening playbook from our Cedar Park opening, so a fourth location can open without me on site.\n\nHere is the first-step draft I was given:\n\"\"\"\nSalon Opening Playbook: Sudsy Paws\n\n1. Choosing the site: traffic, parking, distance from the other salons, lease terms to ask for\n2. Build-out checklist: tubs, dryers, tables, the vendor for each\n3. Hiring: roles to fill, in order, and the 90-day training plan for the full groom\n4. Opening 60 days: local launch, Sudsy Club sign-ups, first commercial accounts nearby\n5. Numbers by month 6: grooms a day, rebook rate, Sudsy Club members, profit\n\nThis week: Jess fills in sections 2 and 3 from the Cedar Park opening while it's fresh.\n\"\"\"\n\nHelp me: 1) turn the outline below into a full checklist, section by section, asking me and Jess what we did at Cedar Park, 2) mark which steps only I do today and who could own them instead, 3) set the month-6 numbers a new salon should hit, and 4) suggest how to keep the playbook up to date after each opening.\n\nAsk me up to three questions first, one at a time, about anything you need to know. Then help me finish it. Keep everything in plain English, and be direct about anything that could go wrong."}}, "sources_line": "Numbers from QuickBooks through Sep 30, 2026, your Business Brain, and your answers. This is a sample report with invented data."}}</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById("report-data").textContent);
+  var I = D.inputs || {}, R = D.results || {}, N = D.narrative || {};
+  var NS = "http://www.w3.org/2000/svg";
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function money(x) {
+    if (x == null) return "n/a";
+    var a = Math.abs(x), s = x < 0 ? "-" : "";
+    if (a >= 1e6) return s + "$" + (a / 1e6).toFixed(a >= 1e7 ? 1 : 2).replace(/\.?0+$/, "") + "M";
+    if (a >= 1e3) return s + "$" + Math.round(a / 1e3) + "K";
+    return s + "$" + Math.round(a);
+  }
+  function range(v) { return v ? money(v.low) + " to " + money(v.high) : "Not enough to estimate yet"; }
+  function fmt(n) { return (Math.round(n * 10) / 10).toString(); }
+
+  var drivers = R.drivers || [];
+  var key = R.constraint;
+  var p12 = (R.path || {})["12_month"], p90 = (R.path || {})["90_day"];
+  var hasValue = !!(R.value_today && R.money && R.money.adjusted_profit > 0);
+  var nd = N.drivers || {}, nm = N.moves || {}, fs = N.first_steps || {};
+
+  /* ---------- Score gauge ---------- */
+  function bandScale(current) {
+    var bands = [["Owner-Trapped", "0 to 39"], ["Operating", "40 to 59"], ["Transferable", "60 to 79"], ["Sellable", "80 to 100"]];
+    return '<ol class="bands" aria-label="Score bands">' + bands.map(function (b) {
+      var on = b[0] === current;
+      return '<li class="' + (on ? "on" : "") + '"' + (on ? ' aria-current="true"' : "") + '><i></i><span>' + b[1] + '</span><b>' + b[0] + '</b></li>';
+    }).join("") + '</ol>';
+  }
+  function gauge(score) {
+    var cx = 150, cy = 150, r = 120, w = 22;
+    function pt(v) { var a = Math.PI * (1 - v / 100); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; }
+    function arc(a, b) { var p = pt(a), q = pt(b); return "M" + p[0] + " " + p[1] + " A" + r + " " + r + " 0 0 1 " + q[0] + " " + q[1]; }
+    var ticks = [40, 60, 80].map(function (t) {
+      var a = Math.PI * (1 - t / 100), x1 = cx + (r - w / 2 - 4) * Math.cos(a), y1 = cy - (r - w / 2 - 4) * Math.sin(a),
+          x2 = cx + (r + w / 2 + 4) * Math.cos(a), y2 = cy - (r + w / 2 + 4) * Math.sin(a);
+      return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#fff" stroke-width="3"/>';
+    }).join("");
+    var s = Math.max(0.5, Math.min(100, score));
+    return '<svg viewBox="12 12 276 146" role="img" aria-label="Sellability Score ' + score + ' out of 100, ' + R.band + '">' +
+      '<path d="' + arc(0, 100) + '" fill="none" stroke="#EEF0F2" stroke-width="' + w + '" stroke-linecap="butt"/>' +
+      '<path d="' + arc(0, s) + '" fill="none" stroke="#176B52" stroke-width="' + w + '" stroke-linecap="butt"/>' +
+      ticks + '</svg>';
+  }
+
+  /* ---------- Owner Trap ring ---------- */
+  function ring(v, max, flagged) {
+    var r = 26, c = 2 * Math.PI * r, f = Math.max(0, Math.min(1, v / max));
+    var col = flagged ? "#9A3B2E" : "#176B52";
+    return '<svg width="68" height="68" viewBox="0 0 68 68" aria-hidden="true">' +
+      '<circle cx="34" cy="34" r="' + r + '" fill="none" stroke="#EEF0F2" stroke-width="8"/>' +
+      '<circle cx="34" cy="34" r="' + r + '" fill="none" stroke="' + col + '" stroke-width="8" stroke-dasharray="' + (c * f) + ' ' + c +
+      '" transform="rotate(-90 34 34)"/>' +
+      '<text x="34" y="38" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1D21" font-family="system-ui,sans-serif">' + fmt(v) + '</text></svg>';
+  }
+
+  /* ---------- Waterfall ---------- */
+  function waterfall(path, hz) {
+    var useValue = hasValue;
+    var start = useValue ? R.value_today.mid : path.start_total;
+    var cols = [{ label: "Today", base: 0, top: start, kind: "total", text: useValue ? money(start) : start + " pts" }];
+    var run = start;
+    path.steps.forEach(function (s) {
+      var after = useValue ? s.value_after : s.total_after;
+      var add = after - run;
+      cols.push({ label: s.short, base: Math.min(run, after), top: Math.max(run, after), kind: s.driver === key ? "key" : "step",
+        text: add > 0 ? "+" + (useValue ? money(add) : fmt(add)) : (useValue ? "+$0" : "+0") });
+      run = after;
+    });
+    cols.push({ label: hz === "90_day" ? "In 90 days" : "In 12 months", base: 0, top: run, kind: "end", text: useValue ? money(run) : run + " pts" });
+
+    var host = document.getElementById("wf");
+    var W = Math.max(640, Math.round((host && host.clientWidth) || 760)), H = W > 1000 ? 340 : 300, padL = 8, padR = 8, padT = 28, padB = 46;
+    var max = Math.max.apply(null, cols.map(function (c) { return c.top; })) || 1;
+    var n = cols.length, slot = (W - padL - padR) / n, bw = Math.min(W > 1000 ? 72 : 46, slot * 0.62);
+    function y(v) { return padT + (H - padT - padB) * (1 - v / max); }
+    var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Value added by each move">';
+    out += '<line x1="0" x2="' + W + '" y1="' + y(0) + '" y2="' + y(0) + '" stroke="#E4E7EB"/>';
+    cols.forEach(function (c, i) {
+      var x = padL + slot * i + (slot - bw) / 2;
+      var fill = c.kind === "total" ? "#3B424B" : c.kind === "end" ? "#176B52" : c.kind === "key" ? "#176B52" : "#B9C9C1";
+      var h = Math.max(2, y(c.base) - y(c.top));
+      out += '<rect x="' + x + '" y="' + y(c.top) + '" width="' + bw + '" height="' + h + '" rx="3" fill="' + fill + '"/>';
+      if (i < n - 1) {
+        var nx = padL + slot * (i + 1) + (slot - bw) / 2, ly = y(c.top);
+        out += '<line x1="' + (x + bw) + '" x2="' + nx + '" y1="' + ly + '" y2="' + ly + '" stroke="#C9CED4" stroke-dasharray="3 3"/>';
+      }
+      var bold = c.kind !== "step";
+      out += '<text x="' + (x + bw / 2) + '" y="' + (y(c.top) - 8) + '" text-anchor="middle" font-size="' + (bold ? 13 : 12) +
+        '" font-weight="' + (bold ? 600 : 500) + '" fill="' + (c.kind === "step" ? "#5E6672" : "#1A1D21") + '" font-family="system-ui,sans-serif">' + esc(c.text) + '</text>';
+      var words = c.label.split(" ");
+      var l1 = words.length > 1 && c.label.length > 11 ? words.slice(0, Math.ceil(words.length / 2)).join(" ") : c.label;
+      var l2 = l1 === c.label ? "" : words.slice(Math.ceil(words.length / 2)).join(" ");
+      out += '<text x="' + (x + bw / 2) + '" y="' + (H - padB + 18) + '" text-anchor="middle" font-size="11.5" fill="#5E6672" font-family="system-ui,sans-serif">' +
+        esc(l1) + (l2 ? '<tspan x="' + (x + bw / 2) + '" dy="14">' + esc(l2) + '</tspan>' : "") + '</text>';
+    });
+    return out + '</svg>';
+  }
+
+  /* ---------- Build page ---------- */
+  var h = [];
+  function head(title, question, extraId) {
+    return '<div class="sh"><h2>' + title + '</h2><p class="q">' + question + '</p>' +
+      (extraId ? '<p class="wf-sub" id="' + extraId + '"></p>' : "") + '</div>';
+  }
+  var topQ = I.goal === "run_without_me"
+    ? "What is my business worth today, and could it run without me?"
+    : "What is my business worth today, and could it sell?";
+  var who = I.business_name ? esc(I.business_name) : "Your business";
+  h.push('<section class="top"><h1>Sell Your Business Blueprint</h1><p class="q">' + topQ + '</p><p class="meta">' + who +
+    (I.date ? ", " + esc(I.date) : "") + '</p>');
+
+  var prev = I.previous;
+  var deltaTxt = "";
+  if (prev && prev.total != null) {
+    var d = R.total - prev.total;
+    deltaTxt = (d >= 0 ? "Up " : "Down ") + Math.abs(d) + " points";
+    if (prev.value_mid != null && hasValue) {
+      var dv = R.value_today.mid - prev.value_mid;
+      deltaTxt += ", value " + (dv >= 0 ? "up " : "down ") + money(Math.abs(dv));
+    }
+    deltaTxt += " since " + esc(prev.date || "last time");
+  }
+  var trap = R.owner_trap || {};
+  var future = p12 && p12.end_value;
+  h.push('<div class="hero"><div><div class="gauge-label">Sellability Score</div><div class="gauge">' + gauge(R.total) +
+    '<div class="gauge-num"><b>' + R.total + '</b><span>out of 100</span></div></div>' +
+    '<div class="band">' + esc(R.band) + '</div>' + (deltaTxt ? '<div class="delta">' + deltaTxt + '</div>' : "") +
+    bandScale(R.band) + '</div>');
+  h.push('<div class="values">');
+  h.push('<div class="val"><small>Ballpark value today</small><strong>' + (hasValue ? range(R.value_today) : "No profit to multiply yet") + '</strong></div>');
+  if (hasValue && future) {
+    h.push('<div class="val future"><small>Potential value if all eight moves land in 12 months</small><strong>' + range(future) + '</strong></div>');
+  } else if (p12) {
+    h.push('<div class="val future"><small>Score if all eight moves land in 12 months</small><strong>' + p12.end_total + ' out of 100, ' + esc(p12.end_band) + '</strong></div>');
+  }
+  h.push('<div class="trap">' + ring(trap.score || 0, trap.max || 37.5, trap.business_is_owner) +
+    '<p><b>Owner Trap: ' + fmt(trap.score || 0) + ' out of 37.5</b><small>' +
+    esc(N.owner_trap_line || (trap.business_is_owner ? "Right now, the business is you." : "The business can stand on more than you.")) + '</small></p></div>');
+  h.push('</div></div></section>');
+
+  h.push('<section>' + head("Where you stand", "What is working, and what is holding the value back?") + '<div class="pair"><div class="callout"><h3>What is working</h3><p>' + esc(N.what_is_working || "") +
+    '</p></div><div class="callout key"><h3>Your constraint</h3><p>' + esc(N.constraint_line || ((drivers.filter(function (x) { return x.key === key; })[0] || {}).name || "")) + '</p></div></div></section>');
+
+  /* Waterfall + moves */
+  h.push('<section><div class="wf-head">' + head("Your value path", "What could it be worth, and which moves get me there?", "wf-sub") + '' +
+    '<div class="toggle" role="group" aria-label="Timeframe"><button type="button" data-h="90_day" aria-pressed="false">In 90 days</button>' +
+    '<button type="button" data-h="12_month" aria-pressed="true">In 12 months</button></div></div>' +
+    '<div class="wf-wrap" id="wf"></div>');
+  h.push('<div class="table-wrap"><table class="moves"><thead><tr><th>Driver</th><th>The move</th><th class="num">Adds in 90 days</th><th class="num">Adds in 12 months</th></tr></thead><tbody>');
+  if (p12 && p90) {
+    p12.steps.forEach(function (s, i) {
+      var s90 = p90.steps[i];
+      var fmtAdd = function (st) {
+        var main = hasValue ? (st.adds > 0 ? "+" + money(st.adds) : "+$0") : "+" + fmt(st.score_to - st.score_from) + " pts";
+        if (st.profit_added) main += '<br><small style="color:#5E6672">profit +' + money(st.profit_added) + '</small>';
+        return main;
+      };
+      h.push('<tr class="' + (s.driver === key ? "is-key" : "") + '"><td class="drv">' + esc(s.name) + '</td><td class="what">' +
+        esc(nm[s.driver] || "") + '</td><td class="num">' + fmtAdd(s90) + '</td><td class="num">' + fmtAdd(s) + '</td></tr>');
+    });
+  }
+  h.push('</tbody></table></div></section>');
+
+  /* Drivers */
+  h.push('<section>' + head("The eight drivers", "Where is the business strong, and where does it still depend on me?") + '<div class="drivers">');
+  drivers.forEach(function (x) {
+    h.push('<div class="drv-row' + (x.key === key ? " is-key" : "") + '"><div class="nm">' + esc(x.name) +
+      (x.partial ? ' <small>(partial)</small>' : "") + '</div><div class="bar"><i style="width:' + (x.score / x.max * 100) +
+      '%"></i></div><div class="sc">' + fmt(x.score) + ' / 12.5</div>' +
+      (nd[x.key] ? '<p class="why">' + esc(nd[x.key]) + '</p>' : "") +
+      (fs[x.key] && fs[x.key].body ? '<button type="button" class="fs-link" data-k="' + x.key + '">First step: ' + esc(fs[x.key].title || "see your first move") + '</button>' : "") +
+      '</div>');
+  });
+  h.push('</div></section>');
+
+  /* 90-day move beside the weekly numbers on wide screens.
+     The TVR test is not its own section: a "no" shows as one line inside the move. */
+  var tvr = R.tvr || {};
+  var tvrGap = ["teachable", "valuable", "repeatable"].some(function (k) { return tvr[k] === false; });
+  var gapHtml = (tvrGap && N.tvr_line) ? '<p class="gap-note">' + esc(N.tvr_line) + '</p>' : "";
+
+  var moveHtml = "";
+  var keyStep = (fs[key] && fs[key].body) || "";
+  if (N.move_name || keyStep) {
+    moveHtml = '<section>' + head("Your 90-day move", "What should I do first?") + '<p class="move-name">' + esc(N.move_name || "") + '</p><p class="move-why">' + esc(N.move_why || "") + '</p>' +
+      gapHtml +
+      (keyStep ? '<div class="draft"><h3>Your first step this week</h3><div>' + esc(keyStep) + '</div></div>' : "") + '</section>';
+  }
+  var weeklyHtml = (N.weekly_numbers && N.weekly_numbers.length) ?
+    '<section>' + head("Three numbers to watch every week", "How will I know it is working?") + '<ul class="watch">' +
+    N.weekly_numbers.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join("") + '</ul></section>' : "";
+
+  if (moveHtml) h.push('<div class="split">' + moveHtml + '<div class="side">' + weeklyHtml + '</div></div>');
+  else h.push(weeklyHtml);
+
+  /* Fine print */
+  h.push('<section class="fine"><p class="next">Save this report. In 90 days, run the Sell Your Business Blueprint again, upload this report, and you will see exactly how far the score and the value moved.</p>' +
+    (R.caveat_text ? '<p>' + esc(R.caveat_text) + '</p>' : "") +
+    (R.assumptions_text ? '<p>' + esc(R.assumptions_text) + '</p>' : "") +
+    (N.sources_line ? '<p>' + esc(N.sources_line) + '</p>' : "") +
+    '<p>Built on the eight value drivers developed by John Warrillow, author of Built to Sell. The Sell Your Business Blueprint by The Uncommon Business. Independent, and not affiliated with or endorsed by John Warrillow.</p></section>');
+
+  document.getElementById("app").innerHTML = h.join("");
+
+  /* ---------- First-step modal ---------- */
+  var dlg = document.getElementById("fs"), lastFocus = null;
+  function stepFor(path, k) { return (path && path.steps || []).filter(function (st) { return st.driver === k; })[0]; }
+  function addTxt(st) {
+    if (!st) return "";
+    if (hasValue) return st.adds > 0 ? money(st.adds) : "$0";
+    return fmt(st.score_to - st.score_from) + " points";
+  }
+  function openStep(k, opener) {
+    var d = drivers.filter(function (x) { return x.key === k; })[0] || {};
+    var f = fs[k] || {};
+    lastFocus = opener || document.activeElement;
+    document.getElementById("fs-kicker").textContent = d.name + ", " + fmt(d.score) + " / 12.5" + (k === key ? ". Your 90-day move" : "");
+    document.getElementById("fs-title").textContent = f.title || "Your first step";
+    document.getElementById("fs-move").textContent = nm[k] || "";
+    var a90 = addTxt(stepFor(p90, k)), a12 = addTxt(stepFor(p12, k));
+    document.getElementById("fs-adds").textContent = (a90 || a12) ? "Adds about " + a90 + " in 90 days and " + a12 + " in 12 months." : "";
+    document.getElementById("fs-body").textContent = f.body || "";
+    document.getElementById("fs-copy").textContent = "Copy draft";
+    var aiP = f.ai_prompt || "";
+    document.getElementById("fs-prompt").textContent = aiP;
+    document.getElementById("fs-ai").style.display = aiP ? "" : "none";
+    var aiBtn = document.getElementById("fs-copy-ai");
+    aiBtn.style.display = aiP ? "" : "none"; aiBtn.textContent = "Copy AI prompt";
+    var det = document.querySelector("#fs-ai details"); if (det) det.open = false;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    document.getElementById("fs-close").focus();
+  }
+  function closeStep() {
+    if (dlg.close) dlg.close(); else dlg.removeAttribute("open");
+  }
+  dlg.addEventListener("close", function () { if (lastFocus && lastFocus.focus) lastFocus.focus(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) closeStep(); });
+  document.getElementById("fs-close").addEventListener("click", closeStep);
+  function copyFrom(btn, srcId, doneLabel) {
+    var src = document.getElementById(srcId), text = src.textContent;
+    function done() { btn.textContent = doneLabel; }
+    function fallback() {
+      try {
+        var det = src.closest("details"); if (det) det.open = true;
+        var r = document.createRange(); r.selectNodeContents(src);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        if (document.execCommand("copy")) done(); else btn.textContent = "Select and copy";
+      } catch (e2) { btn.textContent = "Select and copy"; }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+  document.getElementById("fs-copy").addEventListener("click", function () { copyFrom(this, "fs-body", "Copied"); });
+  document.getElementById("fs-copy-ai").addEventListener("click", function () { copyFrom(this, "fs-prompt", "Prompt copied"); });
+  Array.prototype.forEach.call(document.querySelectorAll(".fs-link"), function (b) {
+    b.addEventListener("click", function () { openStep(b.getAttribute("data-k"), b); });
+  });
+
+  function draw(hz) {
+    var path = R.path && R.path[hz];
+    if (!path) return;
+    document.getElementById("wf").innerHTML = waterfall(path, hz);
+    var sub = hasValue
+      ? "From " + money(R.value_today.mid) + " today to about " + money(path.end_value.mid) + (hz === "90_day" ? " in 90 days if every move is halfway done." : " in 12 months if every move lands.") + " Midpoints shown."
+      : "Score points each move adds. Dollar values appear once there is profit to multiply.";
+    document.getElementById("wf-sub").textContent = sub;
+    Array.prototype.forEach.call(document.querySelectorAll(".toggle button"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-h") === hz ? "true" : "false");
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".toggle button"), function (b) {
+    b.addEventListener("click", function () { currentHz = b.getAttribute("data-h"); draw(currentHz); });
+  });
+  var currentHz = "12_month";
+  draw(currentHz);
+  var rT = null;
+  window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(function () { draw(currentHz); }, 120); });
+})();
+</script>
+</body>
+</html>
